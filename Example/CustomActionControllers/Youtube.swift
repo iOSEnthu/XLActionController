@@ -31,7 +31,7 @@ open class YoutubeCell: ActionCell {
     
     open lazy var animatableBackgroundView: UIView = { [weak self] in
         let view = UIView(frame: self?.frame ?? CGRect.zero)
-        view.backgroundColor = UIColor.red.withAlphaComponent(0.40)
+//        view.backgroundColor = UIColor.red.withAlphaComponent(0.40)
         return view
     }()
     
@@ -63,7 +63,7 @@ open class YoutubeCell: ActionCell {
                 animatableBackgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.0)
                 animatableBackgroundView.frame = CGRect(x: 0, y: 0, width: 30, height: frame.height)
                 animatableBackgroundView.center = CGPoint(x: frame.width * 0.5, y: frame.height * 0.5)
-                
+
                 UIView.animate(withDuration: 0.5) { [weak self] in
                     guard let me  = self else {
                         return
@@ -90,16 +90,17 @@ open class YoutubeActionController: ActionController<YoutubeCell, ActionData, UI
         settings.animation.scale = nil
         settings.animation.present.duration = 0.6
         settings.animation.dismiss.duration = 0.6
-        settings.animation.dismiss.offset = 30
-        settings.animation.dismiss.options = .curveLinear
+        settings.animation.dismiss.offset = 0
+        settings.animation.dismiss.options = .curveEaseIn
         
-        cellSpec = .nibFile(nibName: "YoutubeCell", bundle: Bundle(for: YoutubeCell.self), height: { _  in 46 })
+        cellSpec = .nibFile(nibName: "YoutubeCell", bundle: Bundle(for: YoutubeCell.self), height: { _  in 74 })
         
         onConfigureCellForAction = { cell, action, indexPath in
             cell.setup(action.data?.title, detail: action.data?.subtitle, image: action.data?.image)
             cell.alpha = action.enabled ? 1.0 : 0.5
-            
-            UIView.animate(withDuration: 0.30) {
+            cell.actionTitleLabel?.textColor = .white
+            UIView.animate(withDuration: 0.7) {
+                self.backgroundView.backgroundColor = UIColor(red: 15/255, green: 61/255, blue: 89/255, alpha: 0.75)
             }
         }
     }

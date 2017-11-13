@@ -75,7 +75,7 @@ open class SkypeActionController: ActionController<SkypeCell, String, UICollecti
         settings.animation.present.springVelocity = 0.0
         settings.animation.present.damping = 0.7
         settings.statusBar.style = .default
-
+        
         onConfigureCellForAction = { cell, action, indexPath in
             cell.actionTitleLabel.text = action.data
             cell.actionTitleLabel.textColor = .white
